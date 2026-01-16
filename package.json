@@ -1,0 +1,17 @@
+{
+  "name": "aide-frame-demo-js",
+  "version": "0.1.0",
+  "description": "Demo application showcasing aide-frame Node.js implementation",
+  "main": "app/demo.js",
+  "scripts": {
+    "start": "node app/demo.js",
+    "dev": "node app/demo.js --log-level DEBUG"
+  },
+  "dependencies": {
+    "aide-frame": "file:aide-frame/js/aide_frame"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

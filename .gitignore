@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Runtime
+.update/
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
