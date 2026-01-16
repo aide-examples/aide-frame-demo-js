@@ -55,8 +55,7 @@ aideFrame.log.setLevel(opts.logLevel);
 // Load config
 const cfg = config.loadConfig(
     opts.config,
-    DEFAULT_CONFIG,
-    [path.join(PROJECT_DIR, 'config.json')]
+    DEFAULT_CONFIG
 );
 
 if (opts.port) {
