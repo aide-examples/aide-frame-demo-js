@@ -52,9 +52,12 @@ const opts = program.opts();
 // Apply log level
 aideFrame.log.setLevel(opts.logLevel);
 
-// Load config
+// Load config - resolve relative paths to SCRIPT_DIR
+const configPath = path.isAbsolute(opts.config)
+    ? opts.config
+    : path.join(SCRIPT_DIR, opts.config);
 const cfg = config.loadConfig(
-    opts.config,
+    configPath,
     DEFAULT_CONFIG
 );
 
