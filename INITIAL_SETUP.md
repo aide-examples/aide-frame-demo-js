@@ -1,6 +1,6 @@
 # Initial Setup Instructions for Claude
 
-This document tells Claude how to set up a new aide-frame application.
+This document tells Claude how to set up a new aide-frame JavaScript application.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ The template at ../aide-frame-demo-js shows the complete structure. Study:
 - `run` - adapt to call your app's entry point
 - `app/demo.js` - simplify to create your `app/{APP_NAME_LOWER}.js`
 - `app/static/demo/` - simplify to create `app/static/{APP_NAME_LOWER}/`
-- `app/static/locales/` - simplify, keeping only app_title
+- `app/static/locales/` - simplify, keeping only app_title and hello
 
 ### 3. Key Differences from Demo
 
@@ -37,30 +37,38 @@ When creating the new app:
 - **Note**: HttpServer auto-registers httpRoutes and updateRoutes when configs are provided
 - **Remove** /api/demos and /api/demo/:name routes
 - **Keep** app/docs/ and app/help/ directories - adapt content for new app
-- **Simplify** HTML to just header, "Hello" content, and footer
-- **Simplify** client JS to just widget initialization
-- **Simplify** locales to just app_title translation
+- **Simplify** HTML to just header, "Hello" content, and footer area with status information
+- **Simplify** client JS to just widget initialization (i18n, HeaderWidget, StatusWidget)
+- **Simplify** locales to just app_title and hello translations
 
 ### 4. Setup Steps
 
 1. Initialize git: `git init`
-2. Add aide-frame submodule (check .gitmodules in demo for source path)
+2. Add aide-frame submodule: `git submodule add /home/gero/aide-examples/aide-frame aide-frame`
+   - Check .gitmodules in demo for the exact source path if different
    - If git blocks file:// protocol: `git config --global protocol.file.allow always`
 3. Create directory structure: `mkdir -p app/static/{APP_NAME_LOWER} app/static/locales app/docs app/help`
 4. Create `.gitignore` with:
    ```
    node_modules/
+   .DS_Store
+   deploy/
+
+   # User config (not tracked, copy from sample_config.json)
+   app/config.json
+   releases/
    ```
 5. Create files by adapting from demo:
    - `package.json` (rename project, change main entry)
-   - `run` (change script name)
-   - `app/config.json` (set PORT)
-   - `app/VERSION` (copy as-is)
+   - `run` (change script name, make executable with `chmod +x run`)
+   - `app/config.json` (set port)
+   - `app/sample_config.json` (copy of config.json for version control)
+   - `app/VERSION` (start at 0.1)
    - `app/{APP_NAME_LOWER}.js` (simplified server)
-   - `app/static/{APP_NAME_LOWER}/{APP_NAME_LOWER}.html` (minimal page)
+   - `app/static/{APP_NAME_LOWER}/{APP_NAME_LOWER}.html` (minimal page with header, content, footer area with status information)
    - `app/static/{APP_NAME_LOWER}/{APP_NAME_LOWER}.js` (widget init only)
    - `app/static/{APP_NAME_LOWER}/{APP_NAME_LOWER}.css` (minimal styles)
-   - `app/static/locales/en.json`, `de.json`, `es.json` (app_title only)
+   - `app/static/locales/en.json`, `de.json`, `es.json` (app_title and hello only)
    - `app/docs/index.md` (adapt from demo, describe your app)
    - `app/help/index.md` (adapt from demo, describe your app)
 6. Run `npm install`
@@ -71,7 +79,7 @@ When creating the new app:
 After setup, verify at http://localhost:{PORT}:
 - Header shows APP_NAME with language selector
 - Body shows "Hello"
-- Footer shows version/platform info
+- Footer area shows version/platform status information
 
 ### 6. Final Message to User
 
@@ -79,7 +87,7 @@ After successful setup, tell the user:
 
 > Setup complete! Please test the application by running `./run` and opening
 > http://localhost:{PORT} in your browser. Verify that header, content, and
-> footer display correctly. When satisfied, make an initial git commit:
+> footer area display correctly. When satisfied, make an initial git commit:
 > ```
 > git add .
 > git commit -m "Initial project setup"
@@ -87,6 +95,10 @@ After successful setup, tell the user:
 
 ## Common Issues
 
-- **Port in use**: Use `--port XXXX` or change config.json
+- **Port in use**: Use `--port XXXX` or change app/config.json
 - **Git submodule file protocol error**: Run `git config --global protocol.file.allow always`
 - **"No config file found"**: Normal when running from project root; DEFAULT_CONFIG in server handles this
+
+## Important Notes
+
+**Locale files:** Translate `app_title` appropriately for each language, don't just copy the English name.
