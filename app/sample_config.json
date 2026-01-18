@@ -1,3 +1,14 @@
 {
-    "port": 8082
+    "_comment": "Copy this file to config.json and customize for your app",
+    "port": 8082,
+    "pwa": {
+        "enabled": true,
+        "name": "AIDE Demo JS",
+        "short_name": "AIDEDemoJS",
+        "description": "AIDE Frame JavaScript Demo Application",
+        "theme_color": "#F7DF1E",
+        "background_color": "#ffffff",
+        "icon_192": "/static/icons/icon-192.svg",
+        "icon_512": "/static/icons/icon-512.svg"
+    }
 }
