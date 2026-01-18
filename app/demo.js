@@ -81,7 +81,8 @@ const server = new HttpServer({
                 route: '/sample_docs',
                 subdir: 'sample_docs',
             }
-        }
+        },
+        pwa: cfg.pwa && cfg.pwa.enabled ? cfg.pwa : null,
     },
     updateConfig: {
         githubRepo: 'aide-examples/aide-frame-demo-js',

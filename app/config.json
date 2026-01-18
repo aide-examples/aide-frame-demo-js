@@ -1,3 +1,13 @@
 {
-    "port": 8082
+    "port": 8083,
+    "pwa": {
+        "enabled": true,
+        "name": "AIDE Frame Demo (Node.js)",
+        "short_name": "Demo-JS",
+        "description": "AIDE Frame Demo Application (Node.js)",
+        "theme_color": "#F7DF1E",
+        "background_color": "#ffffff",
+        "icon_192": "/static/icons/icon-192.svg",
+        "icon_512": "/static/icons/icon-512.svg"
+    }
 }
