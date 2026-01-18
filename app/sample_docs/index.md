@@ -4,7 +4,7 @@ This is a demonstration of the custom documentation roots feature in aide-frame.
 
 ## Documents
 
-- [Start Your Own App](start-your-own-app.md) - Create a new aide-frame application
+- [Start Your Own App](01-start-your-own-app.md) - Create a new aide-frame application
 - [Markdown Demo](markdown-demo.md) - Markdown and Mermaid features
 
 ## Features
