@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <rect width="512" height="512" fill="#F7DF1E"/>
-  <text x="256" y="340" font-family="Arial, sans-serif" font-size="240" font-weight="bold" fill="#000" text-anchor="middle">JS</text>
+  <text x="256" y="180" font-family="Arial, sans-serif" font-size="128" font-weight="bold" fill="#000" text-anchor="middle">aide</text>
+  <text x="256" y="370" font-family="Arial, sans-serif" font-size="170" font-weight="bold" fill="#000" text-anchor="middle">JS</text>
 </svg>
