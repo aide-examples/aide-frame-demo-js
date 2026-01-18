@@ -54,7 +54,7 @@ When creating the new app:
    .DS_Store
    deploy/
 
-   # User config (not tracked, copy from sample_config.json)
+   # User config (not tracked, copy from config_sample.json)
    app/config.json
    releases/
    ```
@@ -62,7 +62,7 @@ When creating the new app:
    - `package.json` (rename project, change main entry)
    - `run` (change script name, make executable with `chmod +x run`)
    - `app/config.json` (set port and PWA settings - see aide-frame/js/aide_frame/config_sample.json)
-   - `app/sample_config.json` (copy of config.json for version control)
+   - `app/config_sample.json` (copy of config.json for version control)
    - `app/VERSION` (start at 0.1)
    - `app/{APP_NAME_LOWER}.js` (simplified server)
    - `app/static/{APP_NAME_LOWER}/{APP_NAME_LOWER}.html` (minimal page with header, content, footer area with status information, include manifest link and PWA.init())
