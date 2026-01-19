@@ -17,7 +17,7 @@ const PROJECT_DIR = path.dirname(SCRIPT_DIR);
 // =============================================================================
 
 const aideFrame = require(path.join(PROJECT_DIR, 'aide-frame', 'js', 'aide_frame'));
-const { paths, config, httpRoutes, updateRoutes, HttpServer } = aideFrame;
+const { paths, config, httpRoutes, updateRoutes, HttpServer, iconGenerator } = aideFrame;
 
 paths.init(SCRIPT_DIR);
 
@@ -45,6 +45,7 @@ program
     .option('-l, --log-level <level>', 'Log level', 'INFO')
     .option('-c, --config <path>', 'Config file', 'config.json')
     .option('-p, --port <number>', 'Override port', parseInt)
+    .option('--regenerate-icons', 'Force regeneration of PWA icons')
     .parse();
 
 const opts = program.opts();
@@ -63,6 +64,11 @@ const cfg = config.loadConfig(
 
 if (opts.port) {
     cfg.port = opts.port;
+}
+
+// Generate PWA icons if configured
+if (cfg.pwa) {
+    iconGenerator.ensureIcons(SCRIPT_DIR, cfg.pwa, opts.regenerateIcons || false);
 }
 
 // =============================================================================
