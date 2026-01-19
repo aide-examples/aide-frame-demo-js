@@ -1,5 +1,7 @@
 {
     "port": 8083,
+    "log_level": "INFO",
+    "docs_editable": false,
     "pwa": {
         "enabled": true,
         "name": "AIDE Frame Demo (Node.js)",
