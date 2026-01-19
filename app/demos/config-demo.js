@@ -33,10 +33,12 @@ async function run(data) {
     if (action === 'load_config') {
         // Demonstrate config loading with defaults
         const defaults = { port: 8080, debug: false, name: 'Demo App' };
-        const cfg = config.loadConfig(
-            data.config_path || 'config.json',
-            defaults
-        );
+        // Resolve config path relative to APP_DIR
+        let configPath = data.config_path || 'config.json';
+        if (paths.APP_DIR && !path.isAbsolute(configPath)) {
+            configPath = path.join(paths.APP_DIR, configPath);
+        }
+        const cfg = config.loadConfig(configPath, defaults);
         return {
             action: 'load_config',
             config: cfg,
