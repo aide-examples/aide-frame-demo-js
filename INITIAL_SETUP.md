@@ -104,23 +104,10 @@ After successful setup, tell the user:
 
 ## Code Structure Patterns
 
-All aide-frame applications should follow a consistent code structure for maintainability. The main entry file should be organized with numbered section headers in this order:
+**IMPORTANT:** Follow the standard code structure defined in the framework documentation:
+[aide-frame/docs/spec/app-structure.md](aide-frame/docs/spec/app-structure.md)
 
-1. **PATH SETUP** - Define SCRIPT_DIR, PROJECT_DIR
-2. **AIDE-FRAME INIT** - Require aide-frame and call paths.init(SCRIPT_DIR)
-3. **APP IMPORTS** - Require application-specific modules
-4. **CONFIGURATION** - Define DEFAULT_CONFIG with sensible defaults
-5. **ARGUMENT PARSING** - Use framework's args module (args.addCommonArgs, args.applyCommonArgs)
-6. **SERVER SETUP** - Create HttpServer with docsConfig and updateConfig
-7. **ROUTES** - Define application routes using server.getApp()
-8. **START SERVER** - Call server.run()
-
-Key patterns to follow:
-- Use the framework's args module for command-line parsing (--config, --log-level, --regenerate-icons are provided by addCommonArgs)
-- Let HttpServer auto-register docs/help and update routes when configs are provided
-- Pass PWA config to docsConfig for manifest.json serving
-- Keep DEFAULT_CONFIG inline for simple apps; use a separate config module only for complex apps
-- Don't import httpRoutes/updateRoutes separately; HttpServer handles registration automatically
+This guide defines numbered section headers, key patterns for args handling, HttpServer setup, and PWA configuration.
 
 ## Important Notes
 
