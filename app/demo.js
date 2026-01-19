@@ -17,7 +17,7 @@ const PROJECT_DIR = path.dirname(SCRIPT_DIR);
 // =============================================================================
 
 const aideFrame = require(path.join(PROJECT_DIR, 'aide-frame', 'js', 'aide_frame'));
-const { paths, config, httpRoutes, updateRoutes, HttpServer, iconGenerator } = aideFrame;
+const { paths, args, httpRoutes, updateRoutes, HttpServer } = aideFrame;
 
 paths.init(SCRIPT_DIR);
 
@@ -40,35 +40,21 @@ const DEFAULT_CONFIG = { port: 8083 };
 const { Command } = require('commander');
 const program = new Command();
 
-program
-    .description('AIDE Frame Demo App (Node.js)')
-    .option('-l, --log-level <level>', 'Log level', 'INFO')
-    .option('-c, --config <path>', 'Config file', 'config.json')
-    .option('-p, --port <number>', 'Override port', parseInt)
-    .option('--regenerate-icons', 'Force regeneration of PWA icons')
-    .parse();
+program.description('AIDE Frame Demo App (Node.js)');
+args.addCommonArgs(program);  // Adds --log-level, --config, --regenerate-icons
+program.option('-p, --port <number>', 'Override port', parseInt);
+program.parse();
 
 const opts = program.opts();
 
-// Apply log level
-aideFrame.log.setLevel(opts.logLevel);
-
-// Load config - resolve relative paths to SCRIPT_DIR
-const configPath = path.isAbsolute(opts.config)
-    ? opts.config
-    : path.join(SCRIPT_DIR, opts.config);
-const cfg = config.loadConfig(
-    configPath,
-    DEFAULT_CONFIG
-);
+// Apply common args (log level, config loading, icon generation)
+const cfg = args.applyCommonArgs(opts, {
+    configDefaults: DEFAULT_CONFIG,
+    appDir: SCRIPT_DIR,
+});
 
 if (opts.port) {
     cfg.port = opts.port;
-}
-
-// Generate PWA icons if configured
-if (cfg.pwa) {
-    iconGenerator.ensureIcons(SCRIPT_DIR, cfg.pwa, opts.regenerateIcons || false);
 }
 
 // =============================================================================
