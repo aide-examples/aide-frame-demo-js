@@ -17,7 +17,7 @@ const PROJECT_DIR = path.dirname(SCRIPT_DIR);
 // =============================================================================
 
 const aideFrame = require(path.join(PROJECT_DIR, 'aide-frame', 'js', 'aide_frame'));
-const { paths, args, httpRoutes, updateRoutes, HttpServer } = aideFrame;
+const { paths, args, HttpServer } = aideFrame;
 
 paths.init(SCRIPT_DIR);
 
@@ -28,13 +28,13 @@ paths.init(SCRIPT_DIR);
 const DEMOS = require('./demos');
 
 // =============================================================================
-// CONFIGURATION
+// 4. CONFIGURATION
 // =============================================================================
 
 const DEFAULT_CONFIG = { port: 8083 };
 
 // =============================================================================
-// ARGUMENT PARSING
+// 5. ARGUMENT PARSING
 // =============================================================================
 
 const { Command } = require('commander');
@@ -58,7 +58,7 @@ if (opts.port) {
 }
 
 // =============================================================================
-// SERVER SETUP
+// 6. SERVER SETUP
 // =============================================================================
 
 const server = new HttpServer({
@@ -81,15 +81,10 @@ const server = new HttpServer({
         serviceName: 'aide-frame-demo-js',
     }
 });
-
-// Register docs/help routes
-httpRoutes.register(server.getApp(), server.docsConfig);
-
-// Register update routes
-updateRoutes.register(server.getApp(), server.updateConfig);
+// Note: HttpServer auto-registers docs/help and update routes if configs provided
 
 // =============================================================================
-// CUSTOM ROUTES
+// 7. ROUTES
 // =============================================================================
 
 const app = server.getApp();
@@ -124,7 +119,7 @@ app.post('/api/demo/:name', async (req, res) => {
 });
 
 // =============================================================================
-// START SERVER
+// 8. START SERVER
 // =============================================================================
 
 server.run();
