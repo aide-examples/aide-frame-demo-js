@@ -44,11 +44,17 @@ When creating the new app:
 ### 4. Setup Steps
 
 1. Initialize git: `git init`
-2. Add aide-frame submodule: `git submodule add /home/gero/aide-examples/aide-frame aide-frame`
-   - Check .gitmodules in demo for the exact source path if different
-   - If git blocks file:// protocol: `git config --global protocol.file.allow always`
-3. Create directory structure: `mkdir -p app/static/{APP_NAME_LOWER} app/static/locales app/static/icons app/docs app/help`
-4. Create `.gitignore` with:
+2. Add aide-frame submodule from GitHub:
+   ```bash
+   git submodule add https://github.com/aide-examples/aide-frame.git aide-frame
+   ```
+3. For local development (optional), switch to symlink mode:
+   ```bash
+   ../aide-frame/dev-mode.sh
+   ```
+   See [aide-frame/docs/spec/app-structure.md](aide-frame/docs/spec/app-structure.md) for details on dev vs prod mode.
+4. Create directory structure: `mkdir -p app/static/{APP_NAME_LOWER} app/static/locales app/static/icons app/docs app/help`
+5. Create `.gitignore` with:
    ```
    node_modules/
    .DS_Store
@@ -58,7 +64,7 @@ When creating the new app:
    app/config.json
    releases/
    ```
-5. Create files by adapting from demo:
+6. Create files by adapting from demo:
    - `package.json` (rename project, change main entry)
    - `run` (change script name, make executable with `chmod +x run`)
    - `app/config.json` (set port and PWA settings - see aide-frame/js/aide_frame/config_sample.json)
@@ -72,8 +78,8 @@ When creating the new app:
    - `app/static/locales/en.json`, `de.json`, `es.json` (app_title and hello only)
    - `app/docs/index.md` (adapt from demo, describe your app)
    - `app/help/index.md` (adapt from demo, describe your app)
-6. Run `npm install`
-7. Test with `./run` or `node app/{APP_NAME_LOWER}.js`
+7. Run `npm install`
+8. Test with `./run` or `node app/{APP_NAME_LOWER}.js`
 
 ### 5. Verification
 
@@ -99,8 +105,7 @@ After successful setup, tell the user:
 ## Common Issues
 
 - **Port in use**: Use `--port XXXX` or change app/config.json
-- **Git submodule file protocol error**: Run `git config --global protocol.file.allow always`
-- **"No config file found"**: Normal when running from project root; DEFAULT_CONFIG in server handles this
+- **"No config file found"**: Ensure `configSearchPaths` includes `path.join(SCRIPT_DIR, 'config.json')` in applyCommonArgs - this is critical for PM2/systemd
 
 ## Code Structure Patterns
 

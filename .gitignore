@@ -16,3 +16,4 @@ package-lock.json
 # User config (not tracked, copy from config_sample.json)
 app/config.json
 releases/
+aide-frame

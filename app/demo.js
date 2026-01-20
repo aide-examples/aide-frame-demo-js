@@ -50,6 +50,7 @@ const opts = program.opts();
 // Apply common args (log level, config loading, icon generation)
 const cfg = args.applyCommonArgs(opts, {
     configDefaults: DEFAULT_CONFIG,
+    configSearchPaths: [path.join(SCRIPT_DIR, 'config.json')],
     appDir: SCRIPT_DIR,
 });
 
